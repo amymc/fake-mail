@@ -1,0 +1,33 @@
+<div class="inbox">
+  <div class="inbox__count">
+    You have {{ inbox.messages.length && inbox.messages.length || 'no' }} messages
+  </div>
+  <div ng-hide="!inbox.messages.length">
+      <md-input-container>
+        <label>Search</label>
+        <input type="text" ng-model="inbox.search">
+      </md-input-container>
+  </div>
+  <ul class="inbox__list">
+    <li ng-show="!inbox.messages.length">
+      No messages! Try sending one to a friend.
+    </li>
+    <li ng-repeat="message in inbox.messages | customSearchFilter: inbox.search">
+
+      <div class="inbox__list-info">
+        <p class="inbox__list-from"> {{ message.from}} </p>
+        <p class="inbox__list-date"> {{ message.date | date: 'dd/MM/yyyy' }}</p-->
+        <!--p class="inbox__list-date"> {{ message.date | moment: 'fromNow' }}</p-->
+        <p class="inbox__list-subject"> {{ message.subject }} </p>
+      </div>
+      <div class="inbox__list-actions">
+        <md-button class="md-raised md-primary" ng-click="inbox.goToMessage(message.id);">
+          Read
+        </md-button>
+        <md-button class="md-raised md-primary" ng-click="inbox.deleteMessage(id, $index);">
+          Delete
+        </md-button>
+      </div>
+    </li>
+  </ul>
+</div>
